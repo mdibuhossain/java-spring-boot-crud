@@ -18,7 +18,7 @@ public class CrudAppApplication {
 
     @GetMapping("/")
     public String apiIndex() {
-        return "Hello Boss!";
+        return "Welcome to Java Spring Boot Demo Project!";
     }
 
     @Bean
