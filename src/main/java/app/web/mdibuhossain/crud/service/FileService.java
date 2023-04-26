@@ -1,11 +1,17 @@
 package app.web.mdibuhossain.crud.service;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +22,9 @@ import java.util.Objects;
 public class FileService {
     @Value("${spring.resources.static-locations}")
     private String staticLocation;
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     public String uploadImage(MultipartFile file) {
         try {
             if (file.isEmpty()) {
@@ -29,15 +38,12 @@ public class FileService {
                 throw new Exception("File extension not found!");
             }
 
-//            Path path = Path.of(new ClassPathResource(staticLocation).getFile().getAbsolutePath());
-//            Path path = Paths.get("uploads/image/");
             Path path = Paths.get(staticLocation);
-            System.out.println(path.toString());
             if (!Files.exists(path)) {
                 Files.createDirectories(path);
             }
             Files.copy(file.getInputStream(), path.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
-            return "File uploaded successfully!";
+            return "File uploaded successfully: " + fileName;
         } catch (IOException ex) {
             return "Couldn't upload the file.";
         } catch (Exception e) {
@@ -45,5 +51,10 @@ public class FileService {
                 return e.getMessage();
             return "Internet server error.";
         }
+    }
+
+    public InputStream getImage(String imgID) throws IOException {
+        Path filePath = Paths.get(staticLocation + imgID);
+        return (InputStream) new UrlResource(filePath.toUri()).getInputStream();
     }
 }
