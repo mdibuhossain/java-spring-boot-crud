@@ -25,7 +25,7 @@ public class FileService {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    public String uploadImage(MultipartFile file) {
+    public String upload(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new Exception("file not send.");
@@ -53,7 +53,7 @@ public class FileService {
         }
     }
 
-    public InputStream getImage(String imgID) throws IOException {
+    public InputStream image(String imgID) throws IOException {
         Path filePath = Paths.get(staticLocation + imgID);
         return (InputStream) new UrlResource(filePath.toUri()).getInputStream();
     }

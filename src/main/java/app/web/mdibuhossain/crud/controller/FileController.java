@@ -23,13 +23,13 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(@RequestParam("image") MultipartFile file) {
-        return ResponseEntity.ok(fileService.uploadImage(file));
+    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
+        return ResponseEntity.ok(fileService.upload(file));
     }
 
-    @GetMapping(value = "/{imgID}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/{imgID}")
     public void getImage(@PathVariable("imgID") String imgID, HttpServletResponse response) throws IOException {
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-        StreamUtils.copy(fileService.getImage(imgID), response.getOutputStream());
+        StreamUtils.copy(fileService.image(imgID), response.getOutputStream());
     }
 }
