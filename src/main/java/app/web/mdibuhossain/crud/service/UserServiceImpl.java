@@ -36,18 +36,10 @@ public class UserServiceImpl implements UserService {
             updateUser.addRole(role);
             userRepository.save(updateUser);
         });
-//        if (user.isPresent()) {
-//            System.out.println(user);
-//            System.out.println(role);
-//            User updateUser = user.get();
-//            updateUser.addRole(role);
-//            System.out.println(updateUser);
-//            userRepository.save(updateUser);
-//        }
     }
 
     @Override
-    public Optional<User> gerUser(String email) {
+    public Optional<User> getUser(String email) {
         return userRepository.findByEmail(email);
     }
 

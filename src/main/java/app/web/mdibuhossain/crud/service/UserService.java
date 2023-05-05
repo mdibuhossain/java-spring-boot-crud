@@ -13,7 +13,7 @@ public interface UserService {
 
     void addRoleToUser(String email, String roleName);
 
-    Optional<User> gerUser(String email);
+    Optional<User> getUser(String email);
 
     List<User> getUsers();
 
