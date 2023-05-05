@@ -23,7 +23,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Book>> getSingleBook(@PathVariable ObjectId id) {
+    public ResponseEntity<Optional<Book>> getSingleBook(@PathVariable String id) {
         return ResponseEntity.ok(bookService.singleBook(id));
     }
 
@@ -33,7 +33,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable ObjectId id) {
+    public ResponseEntity<?> deleteBook(@PathVariable String id) {
         try {
             bookService.delete(id);
             return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);

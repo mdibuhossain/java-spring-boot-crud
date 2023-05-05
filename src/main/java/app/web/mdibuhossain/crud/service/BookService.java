@@ -18,7 +18,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Optional<Book> singleBook(ObjectId id) {
+    public Optional<Book> singleBook(String id) {
         return bookRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public void delete(ObjectId id) {
+    public void delete(String id) {
         bookRepository.deleteById(id);
     }
 }
