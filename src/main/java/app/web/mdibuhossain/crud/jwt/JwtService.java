@@ -18,8 +18,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    @Value("${env.SECRETE_KEY}")
-    private static String SECRETE_KEY;
+    @Value("${application.security.jwt.secret-key}")
+    private String SECRETE_KEY;
 
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);

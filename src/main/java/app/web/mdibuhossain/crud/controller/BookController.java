@@ -27,12 +27,12 @@ public class BookController {
         return ResponseEntity.ok(bookService.singleBook(id));
     }
 
-    @PostMapping("")
+    @PostMapping("/save")
     public ResponseEntity<?> insertBook(@RequestBody Book book) {
         return new ResponseEntity<>(bookService.createBook(book), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable String id) {
         try {
             bookService.delete(id);

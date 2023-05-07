@@ -1,6 +1,8 @@
 package app.web.mdibuhossain.crud.model;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,30 +13,30 @@ import java.util.*;
 
 @Document(collection = "users")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@CompoundIndex(def = "{'email' : 1}", unique = true)
 public class User implements UserDetails {
     private String _id;
     private String name;
     private String email;
     private String password;
-    @DBRef(lazy = true)
-    private Set<Role> roles = new HashSet<>();
+    //    @DBRef(lazy = true)
+    private String role;
 
-    public void addRole(Role role) {
-        this.roles.add(role);
+    public void addRole(String role) {
+        this.role = role;
     }
 
-    public void removeRole(Role role) {
-        this.roles.remove(role);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+//        for (Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+        authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
 
