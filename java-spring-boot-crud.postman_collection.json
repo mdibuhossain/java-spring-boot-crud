@@ -12,7 +12,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "localhost:8080/api/v1/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						""
+					]
 				}
 			},
 			"response": []
@@ -39,6 +48,27 @@
 			"response": []
 		},
 		{
+			"name": "GET single book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/book/64382d6f499af7d54e264cf0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"book",
+						"64382d6f499af7d54e264cf0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST book",
 			"request": {
 				"method": "POST",
@@ -53,7 +83,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/book/",
+					"raw": "localhost:8080/api/v1/book/save",
 					"host": [
 						"localhost"
 					],
@@ -62,7 +92,38 @@
 						"api",
 						"v1",
 						"book",
-						""
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"book_name\": \"Test Book\",\r\n    \"author\": \"Ibrahim Bhai\",\r\n    \"edition\": \"01\",\r\n    \"download_link\": \"Google.com\",\r\n    \"categories\": \"cse\",\r\n    \"status\": false,\r\n    \"added_by\": \"ibuhossain3@gmail.com\",\r\n    \"sub_categories\": \"book\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/book/delete/6449af667f55e426a0cbc807",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"book",
+						"delete",
+						"6449af667f55e426a0cbc807"
 					]
 				}
 			},
@@ -228,57 +289,6 @@
 			"response": []
 		},
 		{
-			"name": "DELETE book",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"book_name\": \"Test Book\",\r\n    \"author\": \"Ibrahim Bhai\",\r\n    \"edition\": \"01\",\r\n    \"download_link\": \"Google.com\",\r\n    \"categories\": \"cse\",\r\n    \"status\": false,\r\n    \"added_by\": \"ibuhossain3@gmail.com\",\r\n    \"sub_categories\": \"book\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/v1/book/6449af667f55e426a0cbc807",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"book",
-						"6449af667f55e426a0cbc807"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET single book",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/api/v1/book/64382d6f499af7d54e264cf0",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"book",
-						"64382d6f499af7d54e264cf0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "POST Image",
 			"request": {
 				"method": "POST",
@@ -338,6 +348,66 @@
 						"v1",
 						"image",
 						"1682536292370.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ibrahim Hossain\",\r\n    \"email\": \"ibuhossain3@gmail.com\",\r\n    \"password\": \"123ibu\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ibuhossain3@gmail.com\",\r\n    \"password\": \"123ibu\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/auth/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"authenticate"
 					]
 				}
 			},
