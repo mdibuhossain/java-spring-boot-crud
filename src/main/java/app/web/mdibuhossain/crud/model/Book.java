@@ -14,7 +14,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
-    private String _id;
+    @Id
+    private String id;
     private String book_name;
     private String author;
     private String edition;

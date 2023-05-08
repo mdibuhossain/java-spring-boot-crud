@@ -1,6 +1,7 @@
 package app.web.mdibuhossain.crud.model;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -16,19 +17,15 @@ import java.util.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@CompoundIndex(def = "{'email' : 1}", unique = true)
 public class User implements UserDetails {
-    private String _id;
+    @Id
+    private String id;
     private String name;
+    @Indexed(unique = true)
     private String email;
     private String password;
     //    @DBRef(lazy = true)
-    private String role;
-
-    public void addRole(String role) {
-        this.role = role;
-    }
-
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -36,7 +33,7 @@ public class User implements UserDetails {
 //        for (Role role : roles) {
 //            authorities.add(new SimpleGrantedAuthority(role.getName()));
 //        }
-        authorities.add(new SimpleGrantedAuthority(role));
+        authorities.add(new SimpleGrantedAuthority(role.toString()));
         return authorities;
     }
 

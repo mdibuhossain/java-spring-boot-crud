@@ -3,6 +3,7 @@ package app.web.mdibuhossain.crud.service;
 import app.web.mdibuhossain.crud.dto.AuthRequestDTO;
 import app.web.mdibuhossain.crud.dto.AuthResponseDTO;
 import app.web.mdibuhossain.crud.dto.RegisterRequestDTO;
+import app.web.mdibuhossain.crud.exception.CustomException;
 import app.web.mdibuhossain.crud.jwt.JwtService;
 import app.web.mdibuhossain.crud.model.Role;
 import app.web.mdibuhossain.crud.model.User;
@@ -13,8 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -28,12 +28,13 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthResponseDTO register(RegisterRequestDTO request) {
+    public AuthResponseDTO register(RegisterRequestDTO request) throws CustomException {
+        Optional<User> check = userRepository.findByEmail(request.getEmail());
         var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER.toString())
+                .role(Role.USER)
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
